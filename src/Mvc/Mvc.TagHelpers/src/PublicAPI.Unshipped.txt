@@ -284,6 +284,8 @@ static readonly Microsoft.AspNetCore.Mvc.TagHelpers.CacheTagHelperBase.DefaultEx
 ~Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper.Name.get -> string
 ~Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper.Name.set -> void
 ~Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper.PartialTagHelper(Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine viewEngine, Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers.IViewBufferScope viewBufferScope) -> void
+~Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper.RenderTo.get -> string
+~Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper.RenderTo.set -> void
 ~Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper.ViewContext.get -> Microsoft.AspNetCore.Mvc.Rendering.ViewContext
 ~Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper.ViewContext.set -> void
 ~Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper.ViewData.get -> Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary

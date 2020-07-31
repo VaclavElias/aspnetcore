@@ -25,6 +25,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         private const string ModelAttributeName = "model";
         private const string FallbackAttributeName = "fallback-name";
         private const string OptionalAttributeName = "optional";
+        private const string RenderToAttributeName = "render-to";
         private object _model;
         private bool _hasModel;
         private bool _hasFor;
@@ -93,6 +94,12 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
         public string FallbackName { get; set; }
 
         /// <summary>
+        /// Render child to this ViewData kehy.
+        /// </summary>
+        [HtmlAttributeName(RenderToAttributeName)]
+        public string RenderTo { get; set; } = "RenderChild";
+
+        /// <summary>
         /// A <see cref="ViewDataDictionary"/> to pass into the partial view.
         /// </summary>
         public ViewDataDictionary ViewData { get; set; }
@@ -154,7 +161,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var viewBuffer = new ViewBuffer(_viewBufferScope, result.ViewName, ViewBuffer.PartialViewPageSize);
             using (var writer = new ViewBufferTextWriter(viewBuffer, Encoding.UTF8))
             {
-                ViewContext.ViewData["RenderChild"] = new HtmlString((await output.GetChildContentAsync()).GetContent() ?? "");
+                ViewContext.ViewData[RenderTo] = new HtmlString((await output.GetChildContentAsync()).GetContent() ?? "");
                 await RenderPartialViewAsync(writer, model, result.View);
                 output.Content.SetHtmlContent(viewBuffer);
             }
