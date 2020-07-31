@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -17,7 +18,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
     /// <summary>
     /// Renders a partial view.
     /// </summary>
-    [HtmlTargetElement("partial", Attributes = "name", TagStructure = TagStructure.WithoutEndTag)]
+    [HtmlTargetElement("partial", Attributes = "name", TagStructure = TagStructure.NormalOrSelfClosing)]
     public class PartialTagHelper : TagHelper
     {
         private const string ForAttributeName = "for";
@@ -153,6 +154,7 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers
             var viewBuffer = new ViewBuffer(_viewBufferScope, result.ViewName, ViewBuffer.PartialViewPageSize);
             using (var writer = new ViewBufferTextWriter(viewBuffer, Encoding.UTF8))
             {
+                ViewContext.ViewData["RenderChild"] = new HtmlString((await output.GetChildContentAsync()).GetContent() ?? "");
                 await RenderPartialViewAsync(writer, model, result.View);
                 output.Content.SetHtmlContent(viewBuffer);
             }
